@@ -414,12 +414,13 @@ public class Token {
 
   static class IntToken extends AbstractToken {
     int i;
-    public IntToken(String s) {
+    public IntToken(String s) throws NumberFormatException {
       super(INT_TOKENCLASSID, null);
       try {
         this.i = Integer.parseInt(s);
       } catch (NumberFormatException nfe) {
-        nfe.printStackTrace();
+        //nfe.printStackTrace();
+        throw nfe;
       }
     }
     public String toString() {

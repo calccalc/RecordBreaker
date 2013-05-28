@@ -175,7 +175,11 @@ public class Tokenizer {
     case Token.INT_TOKENCLASSID: {
       Matcher m = intPattern.matcher(inputStr);
       if (m.lookingAt()) {
-        outputToks.add(new Token.IntToken(m.group(1)));
+        try {
+          outputToks.add(new Token.IntToken(m.group(1)));
+        } catch (NumberFormatException nfe) {
+          outputToks.add(new Token.StringToken(m.group(1)));
+        }
         return cutChunk(m, inputStr);
       }
       return null;
